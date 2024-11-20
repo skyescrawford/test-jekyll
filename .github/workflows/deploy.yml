@@ -1,4 +1,4 @@
-name: Deploy Jekyll site to GitHub Pages
+name: First time Deploy Jekyll site to GitHub Pages
 
 on:
   push:
