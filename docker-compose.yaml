@@ -1,6 +1,7 @@
 services:
   jekyll:
     image: bretfisher/jekyll-serve
+    container_name: jekyll-site
     volumes:
       - .:/site
     ports:
