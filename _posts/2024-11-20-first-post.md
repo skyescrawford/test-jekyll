@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Welcome to My First Post'
-date: 2024-11-20
+date: 2024-11-20 12:00:00 +0700
 categories: blog
 ---
 

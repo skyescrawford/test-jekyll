@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Second Post'
-date: 2024-11-21
+date: 2024-11-20 13:00:00 +0700
 categories: blog
 ---
 
