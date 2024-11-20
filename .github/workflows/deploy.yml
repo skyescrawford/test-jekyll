@@ -30,3 +30,6 @@ jobs:
           # The github_token is automatically provided by GitHub Actions
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+
+      - name: Output GitHub Pages URL
+        run: echo "Your site is deployed at: https://skyescrawford.github.io/test-jekyll/"
