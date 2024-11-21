@@ -15,27 +15,34 @@ I will explain what brings me here. So actually, I was learning about CI/CD, spe
 
 As usual, when learning a new language or tool, I tend to visit its official website first. So I went to `https://jekyllrb.com/` to learn how to set up and run Jekyll in development. Unfortunately, it is really complicated to set this up on Windows. You can look into Jekyll installation on Windows at `https://jekyllrb.com/docs/installation/windows/`. If you managed to set up Jekyll using that guide, I have to congratulate you 🚀, good job. As a future DevOps Engineer 😂, we hate to install many dependencies on our local machine, so I needed to find another way to set up my Jekyll for development.
 
-Thanks to Mr. Bretfisher, my DevOps teacher from the Udemy course 😎, who provided a `jekyll-serve` image that includes all of Jekyll's dependencies for development purposes, so I don't have to install it manually on my computer. You can visit the `jekyll-serve` repository on [GitHub](https://github.com/BretFisher/jekyll-serve) or go directly to its image on [Docker Hub](https://hub.docker.com/r/bretfisher/jekyll-serve). We can pull the image using
+Thanks to Mr. Bretfisher, my DevOps teacher from the Udemy course 😎, who provided `jekyll` and `jekyll-serve` image that includes all of Jekyll's dependencies for development purposes, so I don't have to install it manually on my computer. You can visit the `jekyll-serve` repository on [GitHub](https://github.com/BretFisher/jekyll-serve) or go directly to its image on [Docker Hub](https://hub.docker.com/r/bretfisher/jekyll-serve). First, we will scaffold our jekyll project, by default when running `docker run` it will create a container with random name, because project initiation only running once we dont want to persist that temporary container, it is recommended to add option `--rm` to automatically remove container after container process stop.
+
+```sh
+docker run --rm -v $(pwd):/site bretfisher/jekyll new . # initiate a new project
+```
+
+The command above will generate a basic project structure or template for our jekyll project in current working directory, similar to `npx create react app` or `npm create vite@latest`
+
+NB: if you are working on a Windows machine, change `$(pwd)` to `${pwd}`.
 
 ```sh
 docker pull bretfisher/jekyll-serve
 ```
 
-and that is our first step toward developing Jekyll using the jekyll-serve image.
+`jekyll-serve` is like a web server which will serve our jekyll project and watch file changes, so that is our first step toward developing Jekyll using the jekyll-serve image.
 
 As far as I know, there are two ways to run Jekyll in development using the jekyll-serve image:
 
 1. Docker command `docker run`
 2. Docker Compose with `docker-compose.yaml`
 
-Regardless of which method you choose, you have to mount your working directory to `/site` on the container. Here is how it's done using the docker command:
+Regardless of which method you choose, you have to mount your working directory to `/site` on the container. Make sure you are in the correct directory where the project located, if not navigate to that directory first, after that mount that directory to `jekyll-serve`. Here is how it's done using the docker command:
 
 ```sh
-docker run -v $(pwd):/site bretfisher/jekyll new . # initiate a new project
 docker run -p 4000:4000 -v $(pwd):/site bretfisher/jekyll-serve # running development environment
 ```
 
-NB: if you are working on a Windows machine, change `$(pwd)` to `${pwd}`.
+NB again: if you are working on a Windows machine, change `$(pwd)` to `${pwd}`.
 
 Prefer using the compose method? Just create a `docker-compose.yaml` file in your project directory and insert the code below:
 
